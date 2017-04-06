@@ -1,14 +1,10 @@
 #!/usr/local/bin/python3.5
-#This module grabs a funny daily quote
+#This grabs a random daily quote(out of 5 options) and uploads it to twitter
+#BE AWARE this was written to run on raspberry pi specifically
 
-import requests, bs4, sys
-from random import randint
-from twython import Twython
-
-apiKey = 'tJBz2topdypr1BnOqodAxyK3o'
-apiSecret = 'DD5YwsEJByUDRgl3axF4iGFxHdLaWxbh4bmi3t6iNZZDFkrRKL'
-accessToken = '848859293222916096-lSd5ZGPWGBb6ZZDSVh2qVet9dHPCgoS'
-accessTokenSecret = 'qKsiNpp7u0ILIfaetJxpKpsp90LtP1TTGNIkL5bXkJUvW'
+apiSecret = 'VERY SECRET'
+accessToken = 'ALSO SECRET'
+accessTokenSecret = 'EVEN MORE SECRET'
 api = Twython(apiKey,apiSecret,accessToken,accessTokenSecret)
 
 print("Looking up quotes...") #Loading text
