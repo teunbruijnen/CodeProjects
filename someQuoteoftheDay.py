@@ -21,7 +21,7 @@ quotePage.raise_for_status()
 quotePageSoup = bs4.BeautifulSoup(quotePage.text, "html.parser")
 
 AllQuotes = quotePageSoup.find_all('div', class_='bqcpx')
-#print(AllQuotes)
+
 randomQuote = AllQuotes[randint(0,5)].getText()
 
 api.update_status(status=randomQuote)
