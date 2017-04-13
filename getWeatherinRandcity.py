@@ -30,8 +30,10 @@ sliceF = degreesNowF[0].getText()
 degreesNowC = ((int)(sliceF[:2]) - 32) / 1.8
 
 niceWords = ['nice', 'great', 'good', 'wonderful', 'beautiful']
+hashTags = ['#weather', '#dailyweather', '#bot', '#python', '#programming']
+hashTags.extend([randomCity])
 
-tweetThis = ("The temperature in %s at this moment is: %s Fahrenheit. Or %s° Celsius. Have a %s day!" % (randomCity, degreesNowF[0].getText(), str(round(degreesNowC)), niceWords[randint(0,4)]))
+tweetThis = ("The temperature in %s at this moment is: %s Fahrenheit. Or %s° Celsius. Have a %s day! %s %s #%s" % (randomCity, degreesNowF[0].getText(), str(round(degreesNowC)), niceWords[randint(0,4)], hashTags[randint(0,1)], hashTags[randint(2,4)], hashTags[5]))
 
 api.update_status(status=tweetThis)
 

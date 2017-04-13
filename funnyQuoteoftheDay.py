@@ -3,6 +3,7 @@
 
 import requests, bs4, sys
 from twython import Twython
+from random import randint
 
 #Create a .txt file in the directory of your script with your API keys.
 keys = {}
@@ -20,8 +21,6 @@ quotePage.raise_for_status()
 quotePageSoup = bs4.BeautifulSoup(quotePage.text, "html.parser")
 
 AllQuotes = quotePageSoup.find_all('div', class_='bqcpx')
-
-tweetThis = AllQuotes[4].getText()
 
 api.update_status(status=tweetThis)
 
