@@ -1,6 +1,7 @@
 #!/usr/local/bin/python3.5
-#This module grabs the weather in Paris
+#This module Retweets and favourites every post that has #bottest2017. Try it out!
 #BE AWARE: This script was written to run on a raspberry pi specifically
+
 from twython import TwythonStreamer, Twython, TwythonError
 
 #Create a .txt file in the directory of your script with your API keys.

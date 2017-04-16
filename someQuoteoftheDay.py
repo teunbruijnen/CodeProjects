@@ -1,5 +1,6 @@
 #!/usr/local/bin/python3.5
-#This module grabs a funny daily quote
+#This module grabs a some daily quote and uploads it to twitter
+#BE AWARE: This script was written to run on a raspberry pi specifically
 
 import requests, bs4, sys
 from random import randint
@@ -21,9 +22,29 @@ quotePage.raise_for_status()
 quotePageSoup = bs4.BeautifulSoup(quotePage.text, "html.parser")
 
 AllQuotes = quotePageSoup.find_all('div', class_='bqcpx')
-#todo: edit the text in quotes?
+
 randomQuote = AllQuotes[randint(0,5)].getText()
+printUntil = int(randomQuote.index("Day") + 3) #I want to edit the output so I can add some hashtags(twitter only allows 140 characters per tweet).
+randomQuote = randomQuote[printUntil:]
 
-api.update_status(status=randomQuote)
+LonghashTags= ['#inspiration', '#motivation', '#getmotivated', '#dailyquote', '#brainyquote']
+ShorthashTags = ['#quote', '#dailyquote', '#quotes', '#python', '#learn']
 
-print("Tweeted: " + randomQuote)
+if len(randomQuote) > 110:
+    hashTags = ShorthashTags
+elif len(randomQuote) < 110:
+    hashTags = LonghashTags
+
+#have to make sure not to duplicate any tags!
+Tag1 = hashTags[randint(0,4)]
+Tag2 = hashTags[randint(0,4)]
+if Tag2 == Tag1:
+    Tag2 = hashTags[randint(0,4)]
+
+tweetThis = randomQuote  + "%s %s" % (Tag1, Tag2)
+if len(tweetThis) > 140:
+    tweetThis = randomQuote #I want to add the option of having only one hashtag if it is possible in stead of removing BOTH of them.
+
+api.update_status(status=tweetThis)
+
+print("Tweeted: " + tweetThis)
