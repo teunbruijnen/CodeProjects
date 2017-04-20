@@ -36,6 +36,7 @@ while True:
             break
     if already_tweeted:
         randomQuote = AllQuotes[randint(0,5)].getText()
+        printFrom = int(randomQuote.index("Day") + 4)
         randomQuote = randomQuote[printFrom:]
     else:
         break
@@ -47,7 +48,7 @@ if len(randomQuote) > 110:
     hashTags = ShorthashTags
 elif len(randomQuote) < 110:
     hashTags = LonghashTags
-#have to make sure not to duplicate any tags!
+#have to make sure not to duplicate any tags!(Not sure if this works yet..)
 Tag1 = hashTags[randint(0,4)]
 Tag2 = hashTags[randint(0,4)]
 while True:
