@@ -23,9 +23,23 @@ quotePageSoup = bs4.BeautifulSoup(quotePage.text, "html.parser")
 
 AllQuotes = quotePageSoup.find_all('div', class_='bqcpx')
 
-randomQuote = AllQuotes[randint(0,5)].getText()
-printUntil = int(randomQuote.index("Day") + 3) #I want to edit the output so I can add some hashtags(twitter only allows 140 characters per tweet).
-randomQuote = randomQuote[printUntil:]
+randomQuote = AllQuotes[0].getText()#randint(0,5)].getText()
+printFrom = int(randomQuote.index("Day") + 4) #I want to edit the output so I can add some hashtags(twitter only allows 140 characters per tweet).
+randomQuote = randomQuote[printFrom:]
+
+ExistingTweets = api.get_home_timeline(count = 9)
+#Here we check if the quote hasn't been tweeted already.
+while True:
+    already_used = False
+    for tweets in ExistingTweets:
+        if randomQuote[:15] == tweets['text'][:15]:
+            already_used = True
+            break
+    if already_used:
+        randomQuote = AllQuotes[randint(0,5)].getText()
+        randomQuote = randomQuote[printFrom:]
+    else:
+        break
 
 LonghashTags= ['#inspiration', '#motivation', '#getmotivated', '#dailyquote', '#brainyquote']
 ShorthashTags = ['#quote', '#dailyquote', '#quotes', '#python', '#learn']
