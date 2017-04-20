@@ -36,6 +36,7 @@ while True:
             break
     if already_tweeted:
         randomQuote = AllQuotes[randint(0,5)].getText()
+        printFrom = int(randomQuote.index("Day") + 4)
         randomQuote = randomQuote[printFrom:]
     else:
         break
@@ -47,7 +48,7 @@ if len(randomQuote) > 110:
     hashTags = ShorthashTags
 elif len(randomQuote) < 110:
     hashTags = LonghashTags
-#have to make sure not to duplicate any tags!
+#have to make sure not to duplicate any tags!(not sure if this is working properly atm...)
 Tag1 = hashTags[randint(0,4)]
 Tag2 = hashTags[randint(0,4)]
 while True:
@@ -63,6 +64,6 @@ while True:
 tweetThis = randomQuote  + "%s %s" % (Tag1, Tag2)
 if len(tweetThis) > 140:
     tweetThis = randomQuote #I want to add the option of having only one hashtag if it is possible in stead of removing BOTH of them.
-#api.update_status(status=tweetThis)
+api.update_status(status=tweetThis)
 
 print("Tweeted: " + tweetThis)
