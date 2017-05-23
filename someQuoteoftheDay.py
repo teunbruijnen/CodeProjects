@@ -23,7 +23,7 @@ quotePageSoup = bs4.BeautifulSoup(quotePage.text, "html.parser")
 AllQuotes = quotePageSoup.find_all('div', class_='bqcpx')
 
 randomQuote = AllQuotes[randint(0,5)].getText()
-printFrom = int(randomQuote.index("Day") + 4) #I want to edit the output so I can add some hashtags(twitter only allows 140 characters per tweet).
+printFrom = int(randomQuote.index("Day") + 5) #I want to edit the output so I can add some hashtags(twitter only allows 140 characters per tweet).
 randomQuote = randomQuote[printFrom:]
 
 ExistingTweets = api.get_home_timeline(count = 9)
@@ -36,7 +36,7 @@ while True:
             break
     if already_tweeted:
         randomQuote = AllQuotes[randint(0,5)].getText()
-        printFrom = int(randomQuote.index("Day") + 4)
+        printFrom = int(randomQuote.index("Day") + 5)
         randomQuote = randomQuote[printFrom:]
     else:
         break
