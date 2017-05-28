@@ -20,11 +20,12 @@ print("Looking up quotes...") #Loading text
 quotePage = requests.get('https://www.brainyquote.com/quotes_of_the_day.html')
 quotePage.raise_for_status()
 quotePageSoup = bs4.BeautifulSoup(quotePage.text, "html.parser")
-AllQuotes = quotePageSoup.find_all('div', class_='bqcpx')
+AllQuotes = quotePageSoup.find_all('div', class_='mbl_qtbox qotd-qbox boxy bqQt')#class_='bqcpx' class name was changed.
 
 randomQuote = AllQuotes[randint(0,5)].getText()
 printFrom = int(randomQuote.index("Day") + 5) #A bug appeared, first it sliced one character too many, now one character too little. Maybe in a while 5 needs to be changed back to 4. I want to edit the output so I can add some hashtags(twitter only allows 140 characters per tweet).
 randomQuote = randomQuote[printFrom:]
+randomQuote = randomQuote.strip() #don't know why, but they added whitspace at the end of the quote. This fixes that.
 
 ExistingTweets = api.get_home_timeline(count = 9)
 #Here we check if the quote hasn't been tweeted already.
@@ -61,7 +62,7 @@ while True:
     else:
         break
 
-tweetThis = randomQuote  + "%s %s" % (Tag1, Tag2)
+tweetThis = randomQuote + "\n%s %s" % (Tag1, Tag2)
 if len(tweetThis) > 140:
     tweetThis = randomQuote #I want to add the option of having only one hashtag if it is possible in stead of removing BOTH of them.
 api.update_status(status=tweetThis)
