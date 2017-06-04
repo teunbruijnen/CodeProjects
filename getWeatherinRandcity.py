@@ -21,18 +21,20 @@ CityandSite = {'Amsterdam':'https://weather.com/weather/today/l/NLXX0002:1:NL', 
 
 City = list(CityandSite.keys())
 randomCity = City[randint(0,(len(City)-1))]
-print(randomCity)
 weatherPage = requests.get(CityandSite[randomCity])
 weatherSoup = bs4.BeautifulSoup(weatherPage.text, "html.parser")
 
 degreesNowF = weatherSoup.find_all(class_='today_nowcard-temp')
-print(degreesNowF)
 sliceF = degreesNowF[0].getText()
 degreesNowC = ((int)(sliceF[:2]) - 32) / 1.8
 
 niceWords = ['nice', 'great', 'good', 'wonderful', 'beautiful']
 hashTags = ['#weather', '#dailyweather', '#bot', '#python', '#programming', '#daily', '#data', '#temp', '#temperature']
-hashTags.extend([randomCity])
+
+if len(randomCity.split()) == 2:
+    hashTags.extend([randomCity.replace(" ", "")])
+else:
+    hashTags.extend([randomCity])
 
 tweetThis = ("The temperature in %s at this moment is: %s Fahrenheit. Or %s° Celsius. Have a %s day! %s %s #%s" % (randomCity, degreesNowF[0].getText(), str(round(degreesNowC)), niceWords[randint(0,4)], hashTags[randint(0,1)], hashTags[randint(2,4)], hashTags[(len(hashTags)-1)]))
 
