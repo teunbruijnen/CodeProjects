@@ -25,7 +25,7 @@ AllQuotes = quotePageSoup.find_all('div', class_='mbl_qtbox qotd-qbox boxy bqQt'
 randomQuote = AllQuotes[randint(0,5)].getText()
 printFrom = int(randomQuote.index("Day") + 5) #A bug appeared, first it sliced one character too many, now one character too little. Maybe in a while 5 needs to be changed back to 4. I want to edit the output so I can add some hashtags(twitter only allows 140 characters per tweet).
 randomQuote = randomQuote[printFrom:]
-randomQuote = randomQuote.strip() #don't know why, but they added whitspace at the end of the quote. This fixes that.
+randomQuote = randomQuote.strip() #don't know why, but they added whitespace at the end of the quote. This fixes that.
 
 ExistingTweets = api.get_home_timeline(count = 9)
 #Here we check if the quote hasn't been tweeted already.
@@ -49,14 +49,16 @@ if len(randomQuote) >= 110:
     hashTags = ShorthashTags
 elif len(randomQuote) <= 110:
     hashTags = LonghashTags
-#have to make sure not to duplicate any tags!(not sure if this is working properly atm...)
+#have to make sure not to duplicate any tags!(Supposed to be working now.)
 Tag1 = hashTags[randint(0,(len(hashTags)-1))]
 Tag2 = hashTags[randint(0,(len(hashTags)-1))]
+
 while True:
     same_tag = False
-    if Tag1 == Tag2:
-        same_tag = True
-        break
+    for word in Tag1:
+        if Tag1 == Tag2:
+            same_tag = True
+            break
     if same_tag:
         Tag2 = hashTags[randint(0,(len(hashTags)-1))]
     else:
