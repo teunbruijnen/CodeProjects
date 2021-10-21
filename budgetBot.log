@@ -1,0 +1,8 @@
+28.04.2021 18:11:30 INFO: Credentials verified, good to go!
+28.04.2021 18:11:32 INFO: Succesfully taken input for User: TEUNOOM
+28.04.2021 18:11:35 INFO: Succesfully taken input for the Average A Day: 10
+28.04.2021 18:11:36 INFO: Succesfully taken input for Days of Budgetting: 90
+28.04.2021 18:11:40 INFO: Succesfully taken input for Starting Time: 07:45
+28.04.2021 18:11:40 INFO: Succesfully calculated a batch. Amount of zeros in calculated batch: 6
+Amount of 25s: 1
+28.04.2021 18:11:40 INFO: Succesfully calculated your budget for the coming 90 days ! Sleeping until start time now
